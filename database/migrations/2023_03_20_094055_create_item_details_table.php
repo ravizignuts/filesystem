@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('item_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('item_id');
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->string('filename');
             $table->timestamps();
         });
     }

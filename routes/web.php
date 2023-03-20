@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::controller(UploadFileController::class)->group(function(){
+    Route::get('multiuploads','uploadForm');
+    Route::post('multiuploads','uploadSubmit');
+    Route::get('show','showAll')->name('home');
 });

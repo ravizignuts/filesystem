@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ItemDetails extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'item_id',
+        'filename'
+    ];
+    public function items(){
+        return $this->belongsTo(Item::class,'item_id','id');
+    }
 }
