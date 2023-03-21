@@ -9,4 +9,8 @@ class Item extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function itemdetails(){
+        return $this->hasMany(ItemDetails::class,'item_id','id');
+    }
 }
