@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('multiuploads');
+// });
 
 Route::controller(UploadFileController::class)->group(function(){
-    Route::get('multiuploads','uploadForm');
+    Route::get('/','uploadForm');
     Route::post('multiuploads','uploadSubmit');
     Route::get('show','showAll')->name('home');
+    Route::get('delete/{id}','delete')->name('delete');
 });
