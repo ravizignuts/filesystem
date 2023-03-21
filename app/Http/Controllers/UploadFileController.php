@@ -19,7 +19,6 @@ class UploadFileController extends Controller
     }
     public function uploadSubmit(Request $request)
     {
-        // dd($request);
         $validator = Validator::make($request->all(), [
             'name'   => 'required|string : 20',
             'photos' => 'required'
@@ -27,7 +26,6 @@ class UploadFileController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        // dd($validate);
         $item  = Item::create($request->only('name'));
         $images = [];
         if ($request->hasFile('photos')) {
