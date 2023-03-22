@@ -55,7 +55,11 @@ class UploadFileController extends Controller
     }
     public function delete($id)
     {
-        $image = ItemDetails::findOrFail($id);
+        $image = ItemDetails::with('item')->findOrFail($id);
+        $item = Item::findOrFail($image->item['id']);
+        if($item->itemdetails()->count() == 1){
+            $item->delete();
+        }
         $image->delete();
         unlink(storage_path('app/public/techies/' . $image->filename));
         return redirect()->back()->with('message', 'true');

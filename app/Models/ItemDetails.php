@@ -12,7 +12,7 @@ class ItemDetails extends Model
         'item_id',
         'filename'
     ];
-    public function items(){
+    public function item(){
         return $this->belongsTo(Item::class,'item_id','id');
     }
 }
