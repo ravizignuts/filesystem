@@ -1,45 +1,65 @@
 @extends('layout.master')
 @section('content')
-    {{-- @dd($files) --}}
     <div class="table-responsive">
-        <table
-            class="table table-striped
-        table-hover
-        table-borderless
-        table-primary
-        align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>IMAGES</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
+        @if (@empty($files))
+            <h1>No Images Present </h1>
+        @else
+            <table>
                 @foreach ($files as $file)
                     <tr>
-                        <td>
-                            {{ $file['name'] }}
-                        </td>
+                        <td><h5 class="card-title" style="padding-right : 30%;">{{ $file['name'] }}</h5></td>
                     </tr>
-                    @foreach ($file['itemdetails'] as $item)
-                        <tr class="table-primary">
+                        @foreach ($file['itemdetails'] as $item)
                             <td>
-                                <img src={{ asset('storage/techies/' . $item['filename']) }} alt="Image" width="1200"
-                                    height="600" style="border:1px solid black">
+                                <div class="card" style="width: 20em;">
+                                    <img class="card-img-top" src="{{ asset('storage/techies/' . $item['filename']) }}"
+                                        alt="Card image cap" onclick="window.open(this.src)">
+                                    <div class="card-body">
+
+                                        <a href="{{ Route('delete', $item['id']) }}">Delete</a>
+                                    </div>
+                                </div>
                             </td>
-                            <td>
-                                <a href="{{ Route('delete',$item['id']) }}" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
+                        @endforeach
                 @endforeach
-            </tbody>
-        </table>
-        @if (session()->has('message'))
-            @if (session()->get('message') == 'true')
-                <script>
-                    swal("Great!", "Image Deleted Successfully!", "success");
-                </script>
-            @endif
+            </table>
+
+            {{-- <div>
+                @foreach ($files as $file)
+                    <h5 class="card-title" style="padding-right : 30%;">{{ $file['name'] }}</h5>
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="width :50%;">
+                        <div class="carousel-inner ">
+                            @foreach ($file['itemdetails'] as $item)
+                                <div class="carousel-item @if($loop->first) active @endif">
+                                    <div class="slider-image text-center">
+                                        <img src="{{ asset('storage/techies/' . $item['filename']) }}" class="d-inline-block border text-center rounded" alt="image">
+                                        <a href="{{ Route('delete', $item['id']) }}">Delete</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div> --}}
+
+            <div>
+                @if (session()->has('message'))
+                        @if (session()->get('message') == 'true')
+                            <script>
+                                swal("Great!", "Image Deleted Successfully!", "success");
+                            </script>
+                        @endif
+                @endif
+            </div>
         @endif
     </div>
 @endsection
