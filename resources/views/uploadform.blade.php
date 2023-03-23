@@ -20,14 +20,14 @@
 
                     <div class="form-group">
                         <label for="Product Name">Product Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Product Name">
+                        <input type="text" name="name" class="form-control" placeholder="Product Name" value = {{ old('name') }}>
                         @error('name')
                             <div class="error alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <label for="Product Name">Product photos (can attach more than one):</label><br />
-                    <input type="file" class="form-control" name="photos[]" multiple />
+                    <label for="Product Name">Product photos (can attach more than one):</label><br>
+                    <input type="file" class="form-control" name="photos[]" multiple/>
                     @error('photos')
                         <div class="error alert alert-danger">{{ $message }}</div>
                     @enderror
